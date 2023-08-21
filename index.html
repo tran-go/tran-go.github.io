@@ -1,0 +1,332 @@
+<html>
+<title> Somerset Pines Charter School - House Sorting Wheel </title>
+
+<head>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="8.906.0" data-gr-ext-installed="">
+
+
+  <h2> Somerset Pines Academy - House Sorting Wheel </h2>
+
+
+
+  <div class="split left">
+    <div class="centered">
+      <canvas id="canvas" width="1920" height="500"></canvas>
+      <p>Some text.</p>
+    </div>
+  </div>
+
+  <div class="split right">
+    <div class="wrapper">
+
+      <div class="spin" id="container_click">
+        <button class='glowing-btn' id="sortButton" onclick="sortHouse()">
+          <span class='glowing-txt'>
+            <span class='faulty-letter'>
+              SPIN
+            </span>
+        </button>
+      </div>
+
+
+      <div class="block" style="left: 50%; width: 50%;">
+        <div class="logo">
+          <center><img id="Akamai" class="img" src="house/Akamai-Pines.png" alt="gryffindor" style=" width:100%">
+          </center>
+        </div>
+        <div class="logo">
+          <center><img id="Altruismo" class="img" src="house/Altruismo-Pines.png" alt="hufflepuff" style="width:100%">
+          </center>
+        </div>
+        <div class="logo">
+          <center><img id="Ambitieux" class="img" src="house/Ambitieux.png" alt="ravenclaw" style="width:100%"></center>
+        </div>
+        <div class="logo">
+          <center><img id="Harambe" class="img" src="house/Harambe-Pines.png" alt="slytherin" style="width:100%">
+          </center>
+        </div>
+
+        <div class="logo">
+          <center><img id="Isibindi" class="img" src="house/Isibindi.png" alt="slytherin" style="width:100%"></center>
+        </div>
+        <div class="logo">
+          <center><img id="Nukumori" class="img" src="house/Nukumori.png" alt="slytherin" style="width:100%"></center>
+        </div>
+        <div class="logo">
+          <center><img id="Pensativo" class="img" src="house/Pensativo.png" alt="slytherin" style="width:100%"></center>
+        </div>
+        <div class="logo">
+          <center><img id="Potente" class="img" src="house/Potente.png" alt="slytherin" style="width:100%"></center>
+        </div>
+        <div class="logo">
+          <center><img id="Ustalona" class="img" src="house/Ustalona.png" alt="slytherin" style="width:100%"></center>
+        </div>
+        <div class="logo">
+          <center><img id="Virtute" class="img" src="house/Virtute.png" alt="slytherin" style="width:100%"></center>
+        </div>
+      </div>
+
+      <div class="block" style="width: 40%;">
+        <p class="congrat_text" id="id_congrat_text"></p>
+      </div>
+    </div>
+
+
+
+
+    <script>
+      let canvas = document.getElementById("canvas");
+      var size = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20]
+
+      var houses = [
+        {
+          id: "Akamai",
+          color: "#0051ac",
+          message: "Congratulations, you're in House of Akamai!"
+        },
+        {
+          id: "Altruismo",
+          color: "#67b543",
+          message: "Congratulations, you're in House of Altruismo!"
+        },
+        {
+          id: "Ambitieux",
+          color: "#f36b22",
+          message: "Congratulations, you're in House of Ambitieux!"
+        },
+        {
+          id: "Harambe",
+          color: "#ead68f",
+          message: "Congratulations, you're in House of Harambe!"
+        },
+        {
+          id: "Isibindi",
+          color: "#000000",
+          message: "Congratulations, you're in House of Isibindi!"
+        },
+        {
+          id: "Nukumori",
+          color: "#5f499e",
+          message: "Congratulations, you're in House of Nukumori!"
+        },
+        {
+          id: "Pensativo",
+          color: "#ffffff",
+          message: "Congratulations, you're in House of Pensativo!"
+        },
+        {
+          id: "Potente",
+          color: "#ed1c24",
+          message: "Congratulations, you're in House of Potente!"
+        },
+        {
+          id: "Ustalona",
+          color: "#fff576",
+          message: "Congratulations, you're in House of Ustalona !"
+        },
+        {
+          id: "Virtute",
+          color: "#a9aeab",
+          message: "Congratulations, you're in House of Virtue !"
+        },
+      ];
+
+
+
+
+      let wheels = null;
+      let frame = null;
+
+      function repaint(angle)
+      {
+        let r = Math.min(innerWidth, innerHeight) / 2.55 | 0;
+        if (wheels === null)
+        {
+          wheels = [];
+          for (let selected = 0; selected < houses.length; selected++)
+          {
+            let c = document.createElement("canvas");
+            c.width = c.height = 2 * r + 10;
+            let ctx = c.getContext("2d"), cx = 5 + r, cy = 5 + r;
+            let g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+            // g.addColorStop(0, "rgba(0,0,0,0)");
+            // g.addColorStop(1, "rgba(0,0,0,0.5)");
+            for (let i = 0; i < houses.length; i++)
+            {
+              let a0 = 2 * Math.PI * i / houses.length;
+              let a1 = a0 + 2 * Math.PI / (i == 0 ? 1 : houses.length);
+              let a = 2 * Math.PI * (i + 0.5) / houses.length;
+              ctx.beginPath();
+              ctx.moveTo(cx, cy);
+              ctx.arc(cx, cy, r, a0, a1, false);
+              ctx.fillStyle = houses[i].color;
+              ctx.fill();
+              ctx.fillStyle = g;
+              ctx.fill();
+              ctx.save();
+              if (i == selected)
+              {
+                ctx.fillStyle = "#FFFF";
+                ctx.shadowColor = "#FFFF";
+                ctx.shadowBlur = r / 40;
+              } else
+              {
+                // ctx.fillStyle = "#AAA";
+                ctx.fillStyle = "#14f8cb";
+                ctx.shadowColor = "#1714f8";
+                ctx.shadowBlur = r / 100;
+              }
+              ctx.font = "bold " + r / houses.length * 1.1 + "px serif";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.translate(cx, cy);
+              ctx.rotate(a);
+              ctx.fillText(houses[i].id, r * 0.62, 0);
+              ctx.restore();
+            }
+            wheels.push(c);
+          }
+        }
+        if (frame === null)
+        {
+          frame = document.createElement("canvas");
+          frame.width = frame.height = 10 + 2 * r * 1.25 | 0;
+          let ctx = frame.getContext("2d"), cx = frame.width / 2, cy = frame.height / 2;
+          ctx.shadowOffsetX = r / 80;
+          ctx.shadowOffsetY = r / 80;
+          ctx.shadowBlur = r / 40;
+          ctx.shadowColor = "rgba(0,0,0,0.5)";
+          ctx.beginPath();
+          ctx.arc(cx, cy, r * 1.025, 0, 2 * Math.PI, true);
+          ctx.arc(cx, cy, r * 0.975, 0, 2 * Math.PI, false);
+          ctx.fillStyle = "#444";
+          ctx.fill();
+          ctx.shadowOffsetX = r / 40;
+          ctx.shadowOffsetY = r / 40;
+          g = ctx.createRadialGradient(cx - r / 7, cy - r / 7, 0, cx, cy, r / 3);
+          // g.addColorStop(0, "#FFF");
+          // g.addColorStop(0.2, "#F44");
+          // g.addColorStop(1, "#811");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(cx, cy, r / 3.5, 0, 2 * Math.PI, false);
+          ctx.fill();
+          ctx.translate(cx, cy);
+          ctx.rotate(Math.PI - 0.2);
+          ctx.beginPath();
+          ctx.moveTo(- r * 1.1, - r * 0.05);
+          ctx.lineTo(- r * 0.9, 0);
+          ctx.lineTo(- r * 1.1, r * 0.05);
+          ctx.fillStyle = "#F44";
+          ctx.fill();
+        }
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        let cx = innerWidth / 2, cy = innerHeight / 2;
+        let ctx = canvas.getContext("2d");
+        let selected = (Math.floor((- 0.2 - angle) * houses.length / (2 * Math.PI))
+          % houses.length);
+        if (selected < 0) selected += houses.length;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+        ctx.translate(-wheels[selected].width / 2, -wheels[selected].height / 2);
+        ctx.drawImage(wheels[selected], 0, 0);
+        ctx.restore();
+        ctx.drawImage(frame, cx - frame.width / 2, cy - frame.height / 2);
+      }
+
+      let angle = 0, running = false;
+
+      function spinTo(winner, duration)
+      {
+        let final_angle = (-0.2) - (0.5 + winner) * 2 * Math.PI / houses.length;
+        let start_angle = angle - Math.floor(angle / (2 * Math.PI)) * 2 * Math.PI - 5 * 2 * Math.PI;
+        let start = performance.now();
+        function frame()
+        {
+          let now = performance.now();
+          let t = Math.min(1, (now - start) / duration);
+          t = 3 * t * t - 2 * t * t * t; // ease in out
+
+          angle = start_angle + t * (final_angle - start_angle);
+          repaint(angle);
+          if (t < 1) requestAnimationFrame(frame); else running = false;
+
+          if (t >= 0.95)
+          {
+            var selection = houses[winner];
+            const elements = document.querySelectorAll('div .logo');
+
+            // elements.forEach((el) => el.style.display = 'none')
+            elements[winner].style.display = 'block ';
+            // console.log(elements)
+
+
+            // document.getElementById(selection.id).style.display = "block";
+            document.getElementById("id_congrat_text").innerHTML = selection.message;
+          }
+        }
+        requestAnimationFrame(frame);
+        running = true;
+
+
+      }
+
+      // canvas.onmousedown = function ()
+      // {
+      //   if (!running)
+      //   {
+      //     spinTo(Math.random() * houses.length | 0, 5000);
+      //   }
+      // };
+
+
+      // Creates a Sort Function 
+      function sortHouse()
+      {
+
+        id = Math.floor(Math.random() * houses.length)
+        var selection = houses[id];
+
+        // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        const elements = document.querySelectorAll('div .logo');
+        elements.forEach((el) => el.style.display = 'none');
+        document.getElementById("id_congrat_text").innerHTML = "";
+
+
+
+        // spinTo(Math.random() * houses.length | 0, 5000);
+        if (!running)
+        {
+          spinTo(id, 3000);
+        }
+
+      }
+
+
+
+      repaint(angle);
+
+      let csz = null;
+      setInterval(function ()
+      {
+        let sz = innerWidth + "/" + innerHeight;
+        if (csz !== sz)
+        {
+          csz = sz;
+          wheels = frame = null;
+          repaint(angle);
+        }
+      }, 10);
+
+    </script>
+
+
+</body>
+
+</html>

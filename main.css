@@ -3,6 +3,48 @@
     src: url('https://cdn2.hubspot.net/hubfs/678613/Projects/Harry%20Potter%20Battle%20Game/ParryHotter.ttf') format('truetype')
   }
 
+  /* html {
+    font-size: 62.5%;
+  }
+
+  body {
+    font-size: 1em;
+  }
+
+  @media (max-width: 300px) {
+    html {
+      font-size: 70%;
+    }
+  }
+
+  @media (min-width: 500px) {
+    html {
+      font-size: 80%;
+    }
+  }
+
+  @media (min-width: 700px) {
+    html {
+      font-size: 120%;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    html {
+      font-size: 200%;
+    }
+  } */
+
+  .congrat_text {
+    /* position: absolute; */
+    color: white;
+    font-family: "Passion One";
+    font-size: 2em;
+    font-weight: 400;
+    text-align: center;
+
+  }
+
   body {
     background-color: #b80000;
   }
@@ -58,7 +100,7 @@
     padding-top: 10px */
   }
 
-  .wrapper >div {
+  .wrapper>div {
     padding-top: 3%;
   }
 
@@ -75,21 +117,13 @@
 
   .logo {
     display: none;
+    padding-top: 5%;
   }
 
   /* For Glowing button */
 
 
-  .congrat_text {
-    position: absolute;
-    color: white;
-    font-family: "Passion One";
-    font-size: 32px;
-    font-weight: 400;
-    text-align: center;
 
-
-  }
 
   :root {
     --glow-color: hsl(186 100% 69%);
@@ -308,8 +342,18 @@
     }
   }
 
+  
   @media only screen and (max-width: 600px) {
     .glowing-btn {
       font-size: 1em;
     }
+    .congrat_text{
+      font-size: 1em;
+    }
   }
+
+    @media (min-width: 500px) {
+    .congrat_text {
+        font-size: 3em;
+      }
+    }

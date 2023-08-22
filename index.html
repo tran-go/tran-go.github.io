@@ -1,8 +1,10 @@
+<!-- <!DOCTYPE html> -->
 <html>
 <title> Somerset Pines Charter School - House Sorting Wheel </title>
 
 <head>
   <link rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="8.906.0" data-gr-ext-installed="">
@@ -34,109 +36,178 @@
 
       <div class="block" style="left: 50%; width: 50%;">
         <div class="logo">
-          <center><img id="Akamai" class="img" src="house/Akamai-Pines.png" alt="gryffindor" style=" width:100%">
+          <center><img id="Akamai" class="img" src="house/Akamai-Pines.png" alt="gryffindor" style=" width:90%">
           </center>
         </div>
         <div class="logo">
-          <center><img id="Altruismo" class="img" src="house/Altruismo-Pines.png" alt="hufflepuff" style="width:100%">
+          <center><img id="Altruismo" class="img" src="house/Altruismo-Pines.png" alt="hufflepuff" style="width:90%">
           </center>
         </div>
         <div class="logo">
-          <center><img id="Ambitieux" class="img" src="house/Ambitieux.png" alt="ravenclaw" style="width:100%"></center>
+          <center><img id="Ambitieux" class="img" src="house/Ambitieux.png" alt="ravenclaw" style="width:90%"></center>
         </div>
         <div class="logo">
-          <center><img id="Harambe" class="img" src="house/Harambe-Pines.png" alt="slytherin" style="width:100%">
+          <center><img id="Harambe" class="img" src="house/Harambe-Pines.png" alt="slytherin" style="width:90%">
           </center>
         </div>
 
         <div class="logo">
-          <center><img id="Isibindi" class="img" src="house/Isibindi.png" alt="slytherin" style="width:100%"></center>
+          <center><img id="Isibindi" class="img" src="house/Isibindi.png" alt="slytherin" style="width:90%"></center>
         </div>
         <div class="logo">
-          <center><img id="Nukumori" class="img" src="house/Nukumori.png" alt="slytherin" style="width:100%"></center>
+          <center><img id="Nukumori" class="img" src="house/Nukumori.png" alt="slytherin" style="width:90%"></center>
         </div>
         <div class="logo">
-          <center><img id="Pensativo" class="img" src="house/Pensativo.png" alt="slytherin" style="width:100%"></center>
+          <center><img id="Pensativo" class="img" src="house/Pensativo.png" alt="slytherin" style="width:90%"></center>
         </div>
         <div class="logo">
-          <center><img id="Potente" class="img" src="house/Potente.png" alt="slytherin" style="width:100%"></center>
+          <center><img id="Potente" class="img" src="house/Potente.png" alt="slytherin" style="width:90%"></center>
         </div>
         <div class="logo">
-          <center><img id="Ustalona" class="img" src="house/Ustalona.png" alt="slytherin" style="width:100%"></center>
+          <center><img id="Ustalona" class="img" src="house/Ustalona.png" alt="slytherin" style="width:90%"></center>
         </div>
         <div class="logo">
-          <center><img id="Virtute" class="img" src="house/Virtute.png" alt="slytherin" style="width:100%"></center>
+          <center><img id="Virtute" class="img" src="house/Virtute.png" alt="slytherin" style="width:90%"></center>
         </div>
       </div>
 
-      <div class="block" style="width: 40%;">
+      <div class="block" style="width: 100%;">
         <p class="congrat_text" id="id_congrat_text"></p>
+        <!-- <div id=data_goes_here style="color: red;"> </div> -->
       </div>
     </div>
 
 
 
-
     <script>
+
       let canvas = document.getElementById("canvas");
       var size = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20]
 
       var houses = [
         {
           id: "Akamai",
+          isAvailable: 0,
           color: "#0051ac",
-          message: "Congratulations, you're in House of Akamai!"
+          // message: "Congratulations, you're in House of Akamai!"
+          message: "Congratulations, House of Akamai!"
         },
         {
           id: "Altruismo",
+          isAvailable: 0,
           color: "#67b543",
-          message: "Congratulations, you're in House of Altruismo!"
+          // message: "Congratulations, you're in House of Altruismo!"
+          message: "Congratulations, House of Altruismo!"
         },
         {
           id: "Ambitieux",
+          isAvailable: 0,
           color: "#f36b22",
-          message: "Congratulations, you're in House of Ambitieux!"
+          // message: "Congratulations, you're in House of Ambitieux!"
+          message: "Congratulations, House of Ambitieux!"
         },
         {
           id: "Harambe",
+          isAvailable: 0,
           color: "#ead68f",
-          message: "Congratulations, you're in House of Harambe!"
+          // message: "Congratulations, you're in House of Harambe!"
+          message: "Congratulations, House of Harambe!"
         },
         {
           id: "Isibindi",
+          isAvailable: 0,
           color: "#000000",
-          message: "Congratulations, you're in House of Isibindi!"
+          // message: "Congratulations, you're in House of Isibindi!"
+          message: "Congratulations, House of Isibindi!"
         },
         {
           id: "Nukumori",
+          isAvailable: 0,
           color: "#5f499e",
-          message: "Congratulations, you're in House of Nukumori!"
+          // message: "Congratulations, you're in House of Nukumori!"
+          message: "Congratulations, House of Nukumori!"
         },
         {
           id: "Pensativo",
+          isAvailable: 0,
           color: "#ffffff",
-          message: "Congratulations, you're in House of Pensativo!"
+          // message: "Congratulations, you're in House of Pensativo!"
+          message: "Congratulations, House of Pensativo!"
         },
         {
           id: "Potente",
+          isAvailable: 0,
           color: "#ed1c24",
-          message: "Congratulations, you're in House of Potente!"
+          // message: "Congratulations, you're in House of Potente!"
+          message: "Congratulations, House of Potente!"
         },
         {
           id: "Ustalona",
+          isAvailable: 0,
           color: "#fff576",
-          message: "Congratulations, you're in House of Ustalona !"
+          // message: "Congratulations, you're in House of Ustalona !"
+          message: "Congratulations, House of Ustalona !"
         },
         {
           id: "Virtute",
+          isAvailable: 0,
           color: "#a9aeab",
-          message: "Congratulations, you're in House of Virtue !"
+          // message: "Congratulations, you're in House of Virtue !"
+          message: "Congratulations, House of Virtue !"
         },
       ];
 
+      var available_house = []
+
+      // ============================================================
+      // -=--------------------------Update variables
+      // ============================================================
+
+      function autoReload()
+      {
+        available_house = []
+        setTimeout(function ()
+        {
+          var print_out = ''
+          var API_key = 'AIzaSyAz3Qqi6pLYNUWko5N4gStzMcAkwnG9m5c';
+          var url = 'https://sheets.googleapis.com/v4/spreadsheets/1bp0IvytqZBAU6f9HsjKCt8onm2TYLqkEXXth8N9WM1M/values/update!A1:B10?key=AIzaSyAz3Qqi6pLYNUWko5N4gStzMcAkwnG9m5c'
+          $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data)
+            {
+
+              let obj = data;
+
+              let i = 0;
+              for (let i = 0; i < 10; i++)
+              {
+                houses[i].isAvailable = obj.values[i][1];
+                if (houses[i].isAvailable == 1)
+                {
+                  available_house.push(i)
+                }
+              }
+              console.log("=================11111111111111111111=======================")
+              console.log(available_house);
+              console.log("===========================================================")
+              // $('#data_goes_here').html(print_out)
+            }
+          });
+
+          autoReload();  // calling again after 5 seconds
+        }, 5000);
+
+
+      }
+
+      autoReload(); // calling the function for the first time
 
 
 
+      // ============================================================
+      // -=--------------------------PAINT
+      // ============================================================
       let wheels = null;
       let frame = null;
 
@@ -289,10 +360,21 @@
       function sortHouse()
       {
 
-        id = Math.floor(Math.random() * houses.length)
-        var selection = houses[id];
+        // autoReload();
+        if (available_house.length == 0)
+        {
+          return;
+        }
 
-        // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        n = available_house.length;
+        id_tmp = Math.floor(Math.random() * n)
+        id = available_house[id_tmp]
+
+
+
+
+        var selection = houses[id];
 
         const elements = document.querySelectorAll('div .logo');
         elements.forEach((el) => el.style.display = 'none');
@@ -323,6 +405,8 @@
           repaint(angle);
         }
       }, 10);
+
+
 
     </script>
 

@@ -15,8 +15,8 @@
 
 	<div class='full_page'>
 
-		<div class="en-header-school-logo">
-			<div style="text-align: center;">
+		<div class="header">
+			<div class = "header_logo">
 				<img src="images/header_logo.png" alt="Somerset Pines Academy Logo">
 			</div>
 			<div class="header-title">
@@ -32,7 +32,6 @@
 					<canvas id="canvas" width="1920" height="500"></canvas>
 				</div>
 				<div class="item spin" id="container_click">
-		
 					<button class='glowing-btn' id="sortButton" onclick="sortHouse()">
 						<span class='glowing-txt'>
 							<span class='faulty-letter'>
@@ -396,6 +395,14 @@
 
 
 			// Creates a Sort Function
+			$(document).keyup(function(event)
+			{
+				if(event.key=="Enter")
+				{
+					sortHouse()
+				}
+			});
+
 			function sortHouse()
 			{
 

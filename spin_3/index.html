@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<title> Somerset Pines Charter School - House Sorting Wheel </title>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900;1000&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="8.906.0" data-gr-ext-installed="">
+
+	<div class='full_page'>
+
+		<div class="header">
+			<div class = "header_logo">
+				<img src="images/header_logo.png" alt="Somerset Pines Academy Logo">
+			</div>
+			<div class="header-title">
+				<h1>SOMERSET PINES ACADEMY - HOUSE SORTING WHEEL</h1>
+			</div>
+		</div>
+
+
+
+		<div class="page_wrapper">
+			<div class="inner_page_wrapper">
+				<div class="item centered">
+					<canvas id="canvas" width="1920" height="500"></canvas>
+				</div>
+				<div class="item spin" id="container_click">
+					<button class='glowing-btn' id="sortButton" onclick="sortHouse()">
+						<span class='glowing-txt'>
+							<span class='faulty-letter'>
+								SPIN
+							</span>
+					</button>
+				</div>
+
+				<div class="item_right" style="width: 50%; padding-top: 5%; padding-left: 55%;">
+					<div class="logo">
+						<center><img id="body" class="img" src="icon/body_smart.png" alt="body" style=" width:80%">
+						</center>
+					</div>
+					<div class="logo">
+						<center><img id="people" class="img" src="icon/people_smart.png" alt="people" style="width:80%">
+						</center>
+					</div>
+					<div class="logo">
+						<center><img id="word" class="img" src="icon/word_smart.png" alt="word" style="width:90%"></center>
+					</div>
+
+
+					<div class="logo">
+						<center><img id="logic" class="img" src="icon/logic_smart.png" alt="logic" style="width:80%">
+						</center>
+					</div>
+
+					<div class="logo">
+						<center><img id="nature" class="img" src="icon/nature_smart.png" alt="nature" style="width:80%">
+						</center>
+					</div>
+					<div class="logo">
+						<center><img id="self" class="img" src="icon/self_smart.png" alt="self" style="width:80%">
+						</center>
+					</div>
+
+					<div class="logo">
+						<center><img id="picture" class="img" src="icon/picture_smart.png" alt="picture" style="width:80%">
+						</center>
+					</div>
+					<div class="logo">
+						<center><img id="music" class="img" src="icon/music_smart.png" alt="music" style="width:80%">
+						</center>
+					</div>
+		
+		
+		
+					<div class="logo">
+						<center><img id="performance" class="img" src="icon/performance_smart.png" alt="performance" style="width:90%"></center>
+					</div>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+
+
+		<script>
+
+
+			let canvas=document.getElementById("canvas");
+			var size=[20,20,20,20,20,20,20,20,20]
+
+			var houses=[
+				{
+					label:"Body Smart",
+					id: "body",
+					isAvailable: 0,
+					color: "#b0f",
+					// message: "Congratulations, you're in House of Akamai!"
+					// message: "Congratulations, House of Akamai!"
+				},
+				{
+					label:"People Smart",
+					id: "people",
+					isAvailable: 0,
+					color: "#f0b",
+					// message: "Congratulations, you're in House of Altruismo!"
+					// message: "Congratulations, House of Altruismo!"
+				},
+				{
+					label:"Word Smart",
+					id: "word",
+					isAvailable: 0,
+					color: "#bf0",
+					// message: "Congratulations, you're in House of Ambitieux!"
+					// message: "Congratulations, House of Ambitieux!"
+				},
+				{
+					label:"Logic Smart",
+					id: "logic",
+					isAvailable: 0,
+					color: "#ff9900",
+					// message: "Congratulations, you're in House of Harambe!"
+					// message: "Congratulations, House of Harambe!"
+				},
+				{
+					label:"Nature Smart",
+					id: "nature",
+					isAvailable: 0,
+					color: "#0066ff",
+					// message: "Congratulations, you're in House of Isibindi!"
+					// message: "Congratulations, House of Isibindi!"
+				},
+				{
+					label:"Self Smart",
+					id: "self",
+					isAvailable: 0,
+					color: "#33cc33",
+					// message: "Congratulations, you're in House of Nukumori!"
+					// message: "Congratulations, House of Nukumori!"
+				},
+				{
+					label:"Picture Smart",
+					id: "picture",
+					isAvailable: 0,
+					color: "#f49f66",
+					// message: "Congratulations, you're in House of Pensativo!"
+					// message: "Congratulations, House of Pensativo!"
+				},
+				{
+					label:"Music Smart",
+					id: "music",
+					isAvailable: 0,
+					color: "#ff0000",
+					// message: "Congratulations, you're in House of Potente!"
+					// message: "Congratulations, House of Potente!"
+				},
+				{
+					label:"Performance Smart",
+					id: "performance",
+					isAvailable: 0,
+					color: "#ff9900",
+					// message: "Congratulations, you're in House of Ustalona !"
+					// message: "Congratulations, House of Ustalona !"
+				},
+			];
+
+			var available_house=[]
+
+			// ============================================================
+			// -=--------------------------Update variables
+			// ============================================================
+
+			function autoReload()
+			{
+				available_house=[]
+				setTimeout(function()
+				{
+					var print_out=''
+					var API_key='AIzaSyAz3Qqi6pLYNUWko5N4gStzMcAkwnG9m5c';
+					var url='https://sheets.googleapis.com/v4/spreadsheets/1bp0IvytqZBAU6f9HsjKCt8onm2TYLqkEXXth8N9WM1M/values/update!A1:B10?key=AIzaSyAz3Qqi6pLYNUWko5N4gStzMcAkwnG9m5c'
+					$.ajax({
+						type: 'GET',
+						url: url,
+						success: function(data)
+						{
+
+							let obj=data;
+
+							let i=0;
+							for(let i=0;i<houses.length;i++)
+							{
+								houses[i].isAvailable=obj.values[i][1];
+								if(houses[i].isAvailable==1)
+								{
+									available_house.push(i)
+								}
+							}
+							console.log("===========================================================")
+							console.log("========================SPIN NOW===========================")
+							console.log("===========================================================")
+							// $('#data_goes_here').html(print_out)
+						}
+					});
+
+					autoReload();  // calling again after 5 seconds
+				},6000);
+
+				// available_house.push(1);
+				if(available_house.length!=0)
+				{
+					document.getElementById("container_click").style.display="none";
+				}
+				else
+				{
+					document.getElementById("container_click").style.display="block";
+				}
+			}
+
+			autoReload(); // calling the function for the first time
+
+
+
+
+			// ============================================================
+			// -=--------------------------PAINT
+			// ============================================================
+			let wheels=null;
+			let frame=null;
+
+			function repaint(angle)
+			{
+				let r=Math.min(innerWidth,innerHeight)/2.4|0;
+				if(wheels===null)
+				{
+					wheels=[];
+					for(let selected=0;selected<houses.length;selected++)
+					{
+						let c=document.createElement("canvas");
+						c.width=c.height=2*r+10;
+						let ctx=c.getContext("2d"),cx=5+r,cy=5+r;
+						let g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+						// g.addColorStop(0, "rgba(0,0,0,0)");
+						// g.addColorStop(1, "rgba(0,0,0,0.5)");
+						for(let i=0;i<houses.length;i++)
+						{
+							let a0=2*Math.PI*i/houses.length;
+							let a1=a0+2*Math.PI/(i==0? 1:houses.length);
+							let a=2*Math.PI*(i+0.5)/houses.length;
+							ctx.beginPath();
+							ctx.moveTo(cx,cy);
+							ctx.arc(cx,cy,r,a0,a1,false);
+							ctx.fillStyle=houses[i].color;
+							ctx.fill();
+							ctx.fillStyle=g;
+							ctx.fill();
+							ctx.save();
+							if(i==selected)
+							{
+								ctx.fillStyle="#FFFF";
+								ctx.shadowColor="#FFFF";
+								ctx.shadowBlur=r/40;
+							} else
+							{
+								ctx.fillStyle="#61EFFF";
+								// ctx.fillStyle = "#14f8cb";
+								// ctx.shadowColor="#1714f8";
+								// ctx.shadowBlur=r/100;
+								// ctx.shadowBlur=0;
+							}
+							ctx.font="bold "+r/houses.length*0.6+"px serif";
+							ctx.textAlign="center";
+							ctx.textBaseline="middle";
+							ctx.translate(cx,cy);
+							ctx.rotate(a);
+							ctx.fillText(houses[i].label,r*0.62,0);
+							// ctx.strokeText(houses[i].id,r*0.62,0);
+							ctx.restore();
+						}
+						wheels.push(c);
+					}
+				}
+				if(frame===null)
+				{
+					frame=document.createElement("canvas");
+					frame.width=frame.height=10+2*r*1.25|0;
+					let ctx=frame.getContext("2d"),cx=frame.width/2,cy=frame.height/2;
+					ctx.shadowOffsetX=r/80;
+					ctx.shadowOffsetY=r/80;
+					ctx.shadowBlur=r/40;
+					// ctx.shadowColor = "rgba(0,0,0,0.5)";
+
+					// ctx.shadowColor = 'rgba(500, 100, 255, 1)';
+					ctx.shadowColor='rgba(97, 239, 255, 1)';
+					ctx.fillStyle='#61EFFF';
+
+
+					ctx.beginPath();
+					ctx.arc(cx,cy,r*1.025,0,2*Math.PI,true);
+					// ctx.arc(cx, cy, r * 0.975, 0, 2 * Math.PI, false);
+					ctx.arc(cx,cy,r*1.00189,0,2*Math.PI,false);
+
+					ctx.fill();
+					ctx.shadowOffsetX=r/40;
+					ctx.shadowOffsetY=r/40;
+					g=ctx.createRadialGradient(cx-r/7,cy-r/7,0,cx,cy,r/3);
+					// g.addColorStop(0, "#FFF");
+					// g.addColorStop(0.2, "#F44");
+					// g.addColorStop(1, "#811");
+					ctx.fillStyle=g;
+					ctx.beginPath();
+					ctx.arc(cx,cy,r/3.5,0,2*Math.PI,false);
+					ctx.fill();
+					ctx.translate(cx,cy);
+					ctx.rotate(Math.PI-0.2);
+					ctx.beginPath();
+					ctx.moveTo(- r*1.1,- r*0.05);
+					ctx.lineTo(- r*0.9,0);
+					ctx.lineTo(- r*1.1,r*0.05);
+					ctx.fillStyle="#F44";
+					ctx.fill();
+				}
+				canvas.width=innerWidth;
+				canvas.height=innerHeight;
+				let cx=innerWidth/2,cy=innerHeight/2;
+				let ctx=canvas.getContext("2d");
+				let selected=(Math.floor((- 0.2-angle)*houses.length/(2*Math.PI))
+					%houses.length);
+				if(selected<0) selected+=houses.length;
+				ctx.save();
+				ctx.translate(cx,cy);
+				ctx.rotate(angle);
+				ctx.translate(-wheels[selected].width/2,-wheels[selected].height/2);
+				ctx.drawImage(wheels[selected],0,0);
+				ctx.restore();
+				ctx.drawImage(frame,cx-frame.width/2,cy-frame.height/2);
+			}
+
+			let angle=0,running=false;
+
+			function spinTo(winner,duration)
+			{
+				let final_angle=(-0.2)-(0.5+winner)*2*Math.PI/houses.length;
+				let start_angle=angle-Math.floor(angle/(2*Math.PI))*2*Math.PI-5*2*Math.PI;
+				let start=performance.now();
+				function frame()
+				{
+					let now=performance.now();
+					let t=Math.min(1,(now-start)/duration);
+					t=3*t*t-2*t*t*t; // ease in out
+
+					angle=start_angle+t*(final_angle-start_angle);
+					repaint(angle);
+					if(t<1) requestAnimationFrame(frame); else running=false;
+
+					if(running==false)
+					{
+						openCongratulation(winner);
+					}
+
+				}
+
+				requestAnimationFrame(frame);
+				running=true;
+			}
+
+
+			function openCongratulation(id)
+			{
+				// console.log('openCongratulation');
+				var selection=houses[id];
+				const elements=document.querySelectorAll('div .logo');
+				elements[id].style.display='block ';
+				// document.getElementById("myNav").style.width="100%";
+				// document.getElementById("myNav").style.opacity = "1";
+
+				// document.getElementById("id_congrat_text").innerHTML=selection.message;
+			}
+
+			function closeCongratulation()
+			{
+				document.getElementById("myNav").style.width="0";
+				// document.getElementById("myNav").style.display = "none";
+			}
+
+
+			// Creates a Sort Function
+			$(document).keyup(function(event)
+			{
+				if(event.key=="Enter")
+				{
+					sortHouse()
+				}
+			});
+
+			function sortHouse()
+			{
+
+				if(available_house.length==0)
+				{
+					return;
+				}
+
+				n=available_house.length;
+				id_tmp=Math.floor(Math.random()*n)
+				id=available_house[id_tmp]
+
+
+				var selection=houses[id];
+				const elements=document.querySelectorAll('div .logo');
+				elements.forEach((el) => el.style.display='none');
+				// document.getElementById("id_congrat_text").innerHTML="";
+
+
+
+				if(!running)
+				{
+					spinTo(id,3000);
+				}
+
+			}
+
+			repaint(angle);
+
+			let csz=null;
+			setInterval(function()
+			{
+				let sz=innerWidth+"/"+innerHeight;
+				if(csz!==sz)
+				{
+					csz=sz;
+					wheels=frame=null;
+					repaint(angle);
+				}
+			},10);
+
+
+		</script>
+
+
+</body>
+
+</html>

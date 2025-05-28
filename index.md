@@ -6,21 +6,16 @@ title: "Tran Ngo"
 # TRAN NGO
 
 I am a Ph.D. candidate in Mathematics at Florida Atlantic University, USA, advised by **Shi Bai** and **Edoardo Persichetti**.  
-My research focuses on **algebraic number theory**, **post-quantum cryptography**, **lattice-based cryptography**, **quantum algorithms**, and **homomorphic encryption**.
 
-## Contact Information
-
-- **Email**: ngotbtran at gmail dot com  
-- **LinkedIn**: https://www.linkedin.com/in/tran-ngo99/  
-- **Google Scholar**: https://scholar.google.com/citations?user=E7_mlf4AAAAJ&hl=en
+My research focuses on **algebraic number theory**, **post-quantum cryptography**, **lattice-based cryptography**, **quantum algorithms**, and **homomorphic encryption**. Beyond research, I actively engage in mentoring and academic service. I served as the president of the FAU AWM Graduate Student Chapter and help organize outreach efforts supporting diversity in mathematics.
 
 ---
 
-## About Me
+## Contact Information
 
-I am a cryptography researcher with a background in both mathematics and computer science. My work bridges rigorous mathematical foundations and practical cryptographic applications, particularly in post-quantum security, homomorphic encryption, and quantum cryptanalysis.
-
-Beyond research, I actively engage in mentoring and academic service. I served as the president of the FAU AWM Graduate Student Chapter and help organize outreach efforts supporting diversity in mathematics.
+- **Email**: [ngotbtran at gmail dot com](mailto:ngotbtran@gmail.com)  
+- **LinkedIn**: [https://www.linkedin.com/in/tran-ngo99/](https://www.linkedin.com/in/tran-ngo99/)  
+- **Google Scholar**: [https://scholar.google.com/citations?user=E7_mlf4AAAAJ&hl=en](https://scholar.google.com/citations?user=E7_mlf4AAAAJ&hl=en)
 
 ---
 
